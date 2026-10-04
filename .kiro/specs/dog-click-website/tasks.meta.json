@@ -1,0 +1,388 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create `index.html` with `#stage` full-viewport container and `<style>` / `<script>` stubs": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344257390
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344268819
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344493530
+      }
+    ],
+    "1.2 Define `.dog` base styles and the four CSS animation classes": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344257543
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344272932
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344498214
+      }
+    ],
+    "1.3 Add responsive layout guard and custom cursor stub on `#stage`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344257699
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344277099
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344503740
+      }
+    ],
+    "2.1 Write `AnimationController` as an inline JS object with `playOnce`, `playLoop`, and `stop` methods": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344257814
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344509093
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344560874
+      }
+    ],
+    "2.2 Write unit tests for `AnimationController`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344257892
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344565624
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345012518
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345040666
+      }
+    ],
+    "3.1 Write the `DogEntity` constructor — creates `.dog > .dog__body` DOM node, positions it at `(x, y)`, appends to `#stage`, sets `dog--idle` class": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344257993
+      },
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344570145
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345017296
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345044951
+      }
+    ],
+    "3.2 Implement the `DogEntity` animation methods using `AnimationController`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258085
+      },
+      {
+        "executionId": "1a76ba0d-01ad-4da5-9578-21196147495f",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783344667069
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345021653
+      }
+    ],
+    "3.3 Write property test for `DogEntity` animation mutual exclusivity": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258172
+      },
+      {
+        "executionId": "1a76ba0d-01ad-4da5-9578-21196147495f",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783344671109
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345025690
+      }
+    ],
+    "3.4 Write property test for `DogEntity` idle lifecycle": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258291
+      },
+      {
+        "executionId": "1a76ba0d-01ad-4da5-9578-21196147495f",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783344675195
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345030924
+      }
+    ],
+    "3.5 Write property test for `DogEntity` spawn dimensions": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258427
+      },
+      {
+        "executionId": "1a76ba0d-01ad-4da5-9578-21196147495f",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783344679523
+      },
+      {
+        "executionId": "2ba2768c-6dca-4530-9414-bceb644ea14e",
+        "chatSessionId": "sess_7d324642-d1f8-4351-bbfd-6599cb523670",
+        "timestamp": 1783345035249
+      }
+    ],
+    "4. Checkpoint — Core entity layer": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258554
+      }
+    ],
+    "5.1 Write `DogPool` as an inline JS object managing an insertion-ordered array of `DogEntity` instances": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258641
+      }
+    ],
+    "5.2 Write property test for `DogPool` LRU eviction invariant": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258721
+      }
+    ],
+    "5.3 Write unit tests for `DogPool` boundary behavior": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258808
+      }
+    ],
+    "6.1 Write `InputStateMachine.init(containerEl)` — registers `mousedown`, `mousemove` (on `document`), `mouseup` (on `document`), and `contextmenu` / `selectstart` suppression handlers": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258897
+      }
+    ],
+    "6.2 Implement `mousedown` handler — transitions `IDLE → PENDING`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344258974
+      }
+    ],
+    "6.3 Implement `mousemove` handler — handles `PENDING → DRAGGING` and `HOLDING → DRAGGING` transitions": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259056
+      }
+    ],
+    "6.4 Implement `mouseup` handler — handles all terminal transitions back to `IDLE`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259132
+      }
+    ],
+    "6.5 Write property test for click classification": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259237
+      }
+    ],
+    "6.6 Write property test for hold classification": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259368
+      }
+    ],
+    "6.7 Write property test for drag classification": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259453
+      }
+    ],
+    "6.8 Write property test for hold timer cancellation": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259546
+      }
+    ],
+    "6.9 Write property test for hold-to-drag transition": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259630
+      }
+    ],
+    "7. Checkpoint — State machine layer": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259714
+      }
+    ],
+    "8.1 Add `dog:click` event listener on `#stage` — call `activeEntity.playClick()`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259795
+      }
+    ],
+    "8.2 Add `dog:holdstart` and `dog:holdend` event listeners on `#stage`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259885
+      }
+    ],
+    "8.3 Add `dog:dragstart`, `dog:dragmove`, and `dog:dragend` event listeners on `#stage`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344259978
+      }
+    ],
+    "8.4 Write property test for drag position tracking": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260062
+      }
+    ],
+    "8.5 Write property test for click reaction time bound and idle return": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260152
+      }
+    ],
+    "8.6 Write property test for click reaction restart on re-click": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260239
+      }
+    ],
+    "9.1 Implement `CursorController.init(containerEl)` — apply custom cursor to `#stage`": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260356
+      }
+    ],
+    "9.2 Suppress default browser drag behavior during interactions": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260439
+      }
+    ],
+    "9.3 Verify responsive layout — no horizontal scroll at 320 px and 2560 px": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260528
+      }
+    ],
+    "10. Checkpoint — Integration wiring": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260607
+      }
+    ],
+    "11.1 Audit CSS keyframe animations for layout-triggering properties": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260693
+      }
+    ],
+    "11.2 Write integration/smoke test — load page, simulate interactions, assert DOM state": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260787
+      }
+    ],
+    "11.3 Verify single-file self-containment": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260885
+      }
+    ],
+    "12. Final checkpoint — All tests pass": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344260965
+      }
+    ],
+    "1. Create the HTML/CSS skeleton and base styles": [
+      {
+        "executionId": "6c4502c1-2816-4b0c-9a0e-830053ebb35c",
+        "chatSessionId": "sess_342540b7-c0b9-4d45-87b8-d3268537ad73",
+        "timestamp": 1783344503794
+      }
+    ]
+  }
+}

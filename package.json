@@ -1,0 +1,27 @@
+{
+  "name": "revou-coding-camp",
+  "version": "1.0.0",
+  "description": "Albert Wu",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "test:watch": "node node_modules/vitest/vitest.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertwu14/revou-coding-camp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albertwu14/revou-coding-camp/issues"
+  },
+  "homepage": "https://github.com/albertwu14/revou-coding-camp#readme",
+  "devDependencies": {
+    "fast-check": "^4.8.0",
+    "jsdom": "^29.1.1",
+    "vitest": "^4.1.10"
+  }
+}

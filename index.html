@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dog Click</title>
+  <style>
+    /* =====================================================================
+       Reset & base
+    ===================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow: hidden;
+      background: #f0e8d8; /* warm off-white — ensures dog is visible */
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* =====================================================================
+       Stage — full-viewport interactive surface
+    ===================================================================== */
+    #stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      /* Custom cursor placeholder — Req 6.2
+         CursorController (task 9.1) will layer a <div class="cursor"> on top */
+      cursor: none;
+      /* Prevent text selection during interactions */
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* =====================================================================
+       Dog wrapper
+       Requirements: 1.4 — minimum 32×32 px bounding box
+       Design: position:absolute, centered via translate(-50%,-50%)
+    ===================================================================== */
+    .dog {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      transform: translate(-50%, -50%);
+      /* GPU layer hint so composited animations don't cause layout */
+      will-change: transform, opacity;
+      pointer-events: none; /* interactions go to #stage, not dogs */
+    }
+
+    /* =====================================================================
+       Dog body — pure-CSS cute dog shape
+       A tan/brown circle head with two triangular ears, two dot eyes,
+       and a small nose. Built entirely from a <div class="dog__body">
+       and its ::before / ::after pseudoelements.
+
+       Visually distinguishable from both the warm off-white background
+       (Requirements 1.4) and from white (#fff) pages.
+    ===================================================================== */
+    .dog__body {
+      position: relative;
+      width: 32px;
+      height: 32px;
+
+      /* Head — circle */
+      background: #c8832a;          /* warm tan/caramel */
+      border-radius: 50%;
+      border: 2px solid #8b5a1a;    /* darker outline */
+
+      /* Eyes — two small dark dots via box-shadow */
+      box-shadow:
+        /* left eye */
+        -5px -3px 0 2px #3a2010,
+        /* right eye */
+        5px -3px 0 2px #3a2010,
+        /* nose */
+        0 4px 0 1px #8b2020;
+    }
+
+    /* Ears — left ear */
+    .dog__body::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -6px;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 14px solid #c8832a;
+      filter: drop-shadow(-1px -1px 0 #8b5a1a);
+    }
+
+    /* Ears — right ear */
+    .dog__body::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: -6px;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 14px solid #c8832a;
+      filter: drop-shadow(1px -1px 0 #8b5a1a);
+    }
+
+    /* =====================================================================
+       Animation classes
+       Each class on .dog overrides transform (and/or opacity) so the
+       GPU compositor handles everything — no layout-triggering properties.
+       Requirements: 2.4, 3.5, 4.4  — reactions must visually differ
+    ===================================================================== */
+
+    /* --- IDLE: gentle floating bob, 2 s loop --- */
+    /* Requirements: 6.3 — looping, 1–4 s cycle */
+    .dog--idle {
+      animation: dogIdle 2s ease-in-out infinite;
+    }
+
+    @keyframes dogIdle {
+      0%, 100% {
+        transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+        opacity: 1;
+      }
+      25% {
+        transform: translate(-50%, -50%) translateY(-4px) rotate(-3deg);
+      }
+      50% {
+        transform: translate(-50%, -50%) translateY(-6px) rotate(0deg);
+        opacity: 0.95;
+      }
+      75% {
+        transform: translate(-50%, -50%) translateY(-4px) rotate(3deg);
+      }
+    }
+
+    /* --- CLICK: quick bounce/pop, one-shot (0.5 s) --- */
+    /* Requirements: 2.4 — differs from hold/drag; 2.2 — completes ≤1000 ms */
+    .dog--click {
+      animation: dogClick 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes dogClick {
+      0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      15% {
+        transform: translate(-50%, -50%) scale(0.7) rotate(-10deg);
+        opacity: 0.9;
+      }
+      40% {
+        transform: translate(-50%, -50%) scale(1.45) rotate(8deg);
+        opacity: 1;
+      }
+      60% {
+        transform: translate(-50%, -50%) scale(0.9) rotate(-4deg);
+      }
+      80% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    /* --- HOLD: looping slow pulse + warm glow tint --- */
+    /* Requirements: 3.5 — differs from click/drag; looping while held */
+    .dog--hold {
+      animation: dogHold 1s ease-in-out infinite;
+    }
+
+    @keyframes dogHold {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+        filter: brightness(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.25) rotate(0deg);
+        opacity: 0.85;
+        filter: brightness(1.4) saturate(1.5);
+      }
+    }
+
+    /* --- DRAG: tilt + fast tail-wag side-to-side, looping --- */
+    /* Requirements: 4.4 — distinct pose; tracks pointer during drag */
+    .dog--drag {
+      animation: dogDrag 0.35s ease-in-out infinite;
+    }
+
+    @keyframes dogDrag {
+      0% {
+        transform: translate(-50%, -50%) rotate(-18deg) translateX(-3px);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(18deg) translateX(3px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(-18deg) translateX(-3px);
+        opacity: 1;
+      }
+    }
+
+    /* =====================================================================
+       Responsive layout guard
+       Requirements: 6.4 — no horizontal scroll between 320 px and 2560 px
+
+       The primary defence is overflow:hidden on html, body, and #stage
+       above. The rules below add explicit width clamping so #stage never
+       causes a horizontal scrollbar at any viewport in [320px, 2560px].
+    ===================================================================== */
+
+    /* Clamp below minimum supported width */
+    @media (max-width: 320px) {
+      #stage {
+        min-width: 320px;
+        overflow-x: hidden;
+      }
+    }
+
+    /* Ensure #stage never exceeds the viewport on very wide screens */
+    @media (min-width: 2560px) {
+      #stage {
+        max-width: 2560px;
+        overflow-x: hidden;
+      }
+    }
+
+    /* Belt-and-suspenders: prevent any direct child of #stage from
+       causing overflow (dogs are clamped in JS, but this catches edge cases) */
+    #stage > * {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Full-viewport interactive surface -->
+  <div id="stage">
+    <!--
+      Dogs are appended here dynamically by DogPool / DogEntity.
+      Each dog structure:
+        <div class="dog dog--idle" style="left: Xpx; top: Ypx;">
+          <div class="dog__body"></div>
+        </div>
+    -->
+  </div>
+
+  <script>
+    // =========================================================================
+    // AnimationController
+    // Utility for triggering and observing CSS animations on a DOM element.
+    // Requirements: 2.2, 2.3, 6.3, 7.4
+    // =========================================================================
+    const AnimationController = {
+      /**
+       * playOnce(el, className, onDone)
+       * Adds className, waits for animationend (once), then removes className
+       * and calls onDone. Includes a fallback setTimeout in case animationend
+       * never fires (e.g. due to browser quirks).
+       *
+       * @param {HTMLElement} el         - Target element
+       * @param {string}      className  - CSS animation class to apply
+       * @param {Function}    onDone     - Callback invoked after animation ends
+       */
+      playOnce(el, className, onDone) {
+        // Track whether onDone has already been called to prevent double-fire.
+        let done = false;
+
+        const finish = () => {
+          if (done) return;
+          done = true;
+          el.classList.remove(className);
+          if (typeof onDone === 'function') onDone();
+        };
+
+        // Read the animation duration from computed style for the fallback timer.
+        // getComputedStyle returns values like "0.5s" or "500ms".
+        el.classList.add(className);
+
+        const rawDuration = getComputedStyle(el).animationDuration || '0s';
+        const durationMs = rawDuration.endsWith('ms')
+          ? parseFloat(rawDuration)
+          : parseFloat(rawDuration) * 1000;
+
+        // One-time animationend listener — primary completion path.
+        el.addEventListener('animationend', finish, { once: true });
+
+        // Fallback: fires at duration + 50 ms if animationend never arrives.
+        const fallbackTimer = setTimeout(finish, durationMs + 50);
+
+        // Store the timer id on the element so DogEntity can cancel it on
+        // destroy() if needed. Keyed by className to avoid collisions.
+        el._acTimers = el._acTimers || {};
+        el._acTimers[className] = fallbackTimer;
+      },
+
+      /**
+       * playLoop(el, className)
+       * Adds className and lets the CSS animation loop indefinitely.
+       * Caller must invoke AnimationController.stop(el, className) to remove.
+       *
+       * @param {HTMLElement} el        - Target element
+       * @param {string}      className - CSS animation class to apply
+       */
+      playLoop(el, className) {
+        el.classList.add(className);
+      },
+
+      /**
+       * stop(el, className)
+       * Removes className, halting the animation.
+       *
+       * @param {HTMLElement} el        - Target element
+       * @param {string}      className - CSS animation class to remove
+       */
+      stop(el, className) {
+        el.classList.remove(className);
+      },
+    };
+
+    // =========================================================================
+    // DogEntity
+    // Owns one <div class="dog"> DOM element. Manages position and animation.
+    // Requirements: 1.1, 1.2, 1.3, 1.4, 2.1, 2.3, 2.5, 3.1, 3.3, 3.4,
+    //               4.1, 4.3, 5.1, 5.2, 6.3
+    // =========================================================================
+
+    // Monotonic ID counter for LRU ordering.
+    let _dogEntityNextId = 0;
+
+    /**
+     * DogEntity constructor
+     * Creates a .dog > .dog__body DOM node, positions it at (x, y),
+     * appends it to #stage, and sets the dog--idle class.
+     *
+     * @param {number} x - clientX spawn coordinate (px)
+     * @param {number} y - clientY spawn coordinate (px)
+     */
+    function DogEntity(x, y) {
+      this.id = _dogEntityNextId++;
+      this.x = x;
+      this.y = y;
+      this.animState = 'idle';
+
+      // Build DOM: <div class="dog dog--idle"><div class="dog__body"></div></div>
+      this.el = document.createElement('div');
+      this.el.className = 'dog dog--idle';
+
+      const body = document.createElement('div');
+      body.className = 'dog__body';
+      this.el.appendChild(body);
+
+      // Position the dog centered on the spawn point.
+      this.el.style.left = x + 'px';
+      this.el.style.top  = y + 'px';
+
+      const stage = document.getElementById('stage');
+      stage.appendChild(this.el);
+    }
+
+    /**
+     * moveTo(x, y)
+     * Updates the dog's position, clamping to stage bounds so the dog
+     * never clips outside the viewport edge.
+     *
+     * @param {number} x - new left position (px)
+     * @param {number} y - new top position (px)
+     */
+    DogEntity.prototype.moveTo = function(x, y) {
+      const stage = document.getElementById('stage');
+      const stageW = stage.offsetWidth;
+      const stageH = stage.offsetHeight;
+      const clampedX = Math.max(16, Math.min(stageW - 16, x));
+      const clampedY = Math.max(16, Math.min(stageH - 16, y));
+      this.x = clampedX;
+      this.y = clampedY;
+      this.el.style.left = clampedX + 'px';
+      this.el.style.top  = clampedY + 'px';
+    };
+
+    /**
+     * destroy()
+     * Removes the DOM node, clears any pending animation fallback timers,
+     * and nullifies references to allow GC.
+     */
+    DogEntity.prototype.destroy = function() {
+      // Cancel any pending AnimationController fallback timers.
+      if (this.el._acTimers) {
+        Object.values(this.el._acTimers).forEach(clearTimeout);
+        this.el._acTimers = {};
+      }
+      if (this.el.parentNode) {
+        this.el.parentNode.removeChild(this.el);
+      }
+      this.el = null;
+    };
+
+    // -------------------------------------------------------------------------
+    // DogEntity animation methods (Task 3.2)
+    // All reaction classes: dog--click, dog--hold, dog--drag
+    // Mutual exclusivity: each method removes ALL other reaction classes first.
+    // -------------------------------------------------------------------------
+
+    /** All reaction class names — used to enforce mutual exclusivity. */
+    const DOG_REACTION_CLASSES = ['dog--click', 'dog--hold', 'dog--drag'];
+
+    /**
+     * _removeAllReactionClasses(el)
+     * Removes every reaction class from the element in one pass.
+     * Called at the start of every animation method to ensure mutual exclusivity.
+     *
+     * @param {HTMLElement} el
+     */
+    function _removeAllReactionClasses(el) {
+      DOG_REACTION_CLASSES.forEach(function(cls) {
+        el.classList.remove(cls);
+      });
+    }
+
+    /**
+     * playClick()
+     * Enter click reaction (Req 2.1, 2.3, 2.5).
+     *
+     * Behaviour:
+     *  - Removes all reaction classes (mutual exclusivity).
+     *  - Removes dog--idle so the idle animation does not compete.
+     *  - If already in dog--click, the class-remove above already reset it;
+     *    re-adding it below restarts the CSS animation from frame 0 (Req 2.5).
+     *  - Uses AnimationController.playOnce; on completion applies dog--idle.
+     */
+    DogEntity.prototype.playClick = function() {
+      const el = this.el;
+      if (!el) return;
+
+      // Remove idle and all reaction classes — this handles both the normal case
+      // and the restart case (dog already in dog--click gets its class removed
+      // here, which resets the animation; re-adding below restarts it).
+      el.classList.remove('dog--idle');
+      _removeAllReactionClasses(el);
+
+      this.animState = 'click';
+
+      AnimationController.playOnce(el, 'dog--click', () => {
+        if (!this.el) return; // guard: entity may have been destroyed
+        this.animState = 'idle';
+        this.el.classList.add('dog--idle');
+      });
+    };
+
+    /**
+     * playHold()
+     * Enter hold reaction (Req 3.1, 3.3).
+     *
+     * Removes dog--idle and all reaction classes, then starts a looping
+     * dog--hold animation.
+     */
+    DogEntity.prototype.playHold = function() {
+      const el = this.el;
+      if (!el) return;
+
+      el.classList.remove('dog--idle');
+      _removeAllReactionClasses(el);
+
+      this.animState = 'hold';
+      AnimationController.playLoop(el, 'dog--hold');
+    };
+
+    /**
+     * stopHold()
+     * Return to idle from hold reaction (Req 3.4).
+     *
+     * Stops the dog--hold loop and applies dog--idle.
+     */
+    DogEntity.prototype.stopHold = function() {
+      const el = this.el;
+      if (!el) return;
+
+      AnimationController.stop(el, 'dog--hold');
+      this.animState = 'idle';
+      el.classList.add('dog--idle');
+    };
+
+    /**
+     * startDrag()
+     * Enter drag reaction (Req 4.1, 5.2).
+     *
+     * Removes dog--idle and all reaction classes (including dog--hold for the
+     * hold-to-drag transition), then starts a looping dog--drag animation.
+     */
+    DogEntity.prototype.startDrag = function() {
+      const el = this.el;
+      if (!el) return;
+
+      el.classList.remove('dog--idle');
+      _removeAllReactionClasses(el);
+
+      this.animState = 'drag';
+      AnimationController.playLoop(el, 'dog--drag');
+    };
+
+    /**
+     * stopDrag()
+     * Return to idle from drag reaction (Req 4.3).
+     *
+     * Stops the dog--drag loop and applies dog--idle.
+     */
+    DogEntity.prototype.stopDrag = function() {
+      const el = this.el;
+      if (!el) return;
+
+      AnimationController.stop(el, 'dog--drag');
+      this.animState = 'idle';
+      el.classList.add('dog--idle');
+    };
+
+    // JavaScript modules to be added in subsequent tasks:
+    //   - DogPool              (task 5.1)
+    //   - InputStateMachine    (tasks 6.1 – 6.4)
+    //   - CursorController     (task 9.1)
+    //   - Event wiring         (tasks 8.1 – 8.3)
+  </script>
+</body>
+</html>
